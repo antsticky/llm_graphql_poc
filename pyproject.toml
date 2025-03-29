@@ -36,4 +36,4 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
 publish_data = "data_publisher.main:main"
 llm_agent = "llm_agent.main:main"
-graph_main = "llm_agent.graphana_sql:main"
+dab = "dab_clone.main:main"
