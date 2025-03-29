@@ -1,6 +1,11 @@
-from sqlalchemy import create_engine, Column, Integer, String, Float, Boolean, Date, ForeignKey
-from sqlalchemy.orm import declarative_base, relationship, sessionmaker
+import click
 from faker import Faker
+
+from sqlalchemy.orm import declarative_base, relationship, sessionmaker
+from sqlalchemy import create_engine, Column, Integer, String, Float, Boolean, Date, ForeignKey
+
+
+ALLOWED_VALUES = ["book", "author", "publisher"]
 
 Base = declarative_base()
 
@@ -155,6 +160,19 @@ def create_book():
 
     print("500 books have been successfully added!")
     
-    
-def main():    
-    create_publisher()
+
+def validate_literal(ctx, param, value):
+    if value not in ALLOWED_VALUES:
+        raise click.BadParameter(f"Value must be one of {', '.join(ALLOWED_VALUES)}")
+    return value
+
+@click.command()
+@click.option("--table_type", prompt="Table Name", callback=validate_literal, help="Accepted values: book, author, publisher")
+def main(table_type):
+    match table_type:
+        case "book":
+            create_book()
+        case "author":
+            create_author()
+        case "publisher":
+            create_publisher()
