@@ -1,0 +1,38 @@
+[project]
+name = "llm_db"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Peter Sinkovicz",email = "antsticky@gmail.com"}
+]
+
+[tool.poetry]
+packages = [
+    { include = "data_publisher", from = "src"},
+    { include = "llm_agent", from = "src"}
+]
+
+
+[tool.poetry.dependencies]
+python = "^3.9"
+sqlalchemy = "^2.0.39"
+psycopg2-binary = "^2.9.10"
+faker = "^37.0.0"
+langchain = "^0.3.20"
+langchain-community = "^0.3.19"
+langchain-experimental = "^0.3.4"
+langchain-openai = "^0.3.8"
+requests = "^2.32.3"
+flask = "^3.1.0"
+graphene-sqlalchemy = ">=3.0.0b1"
+graphql-server = "^3.0.0b7"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+publish_data = "data_publisher.main:main"
+llm_agent = "llm_agent.main:main"
+graph_main = "llm_agent.graphana_sql:main"
