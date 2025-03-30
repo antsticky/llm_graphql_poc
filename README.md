@@ -9,4 +9,6 @@ The key functionality includes:
 - Creating GraphQL query fields for fetching data from tables
 - Supporting pagination with limit and offset arguments
 
-![Description of alma](docs/example_query.png)
+![Description of simple Query](docs/example_query.png)
+
+![Description of nested Query](docs/example_nested_query.png)

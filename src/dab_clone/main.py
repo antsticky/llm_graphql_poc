@@ -4,7 +4,7 @@ from graphql_server.flask import GraphQLView
 from dab_clone.src.auth import authenticate_request
 
 from dab_clone.src.errors import custom_format_error
-from dab_clone.src.graphql import get_db_graphql_schema
+from dab_clone.src.graphql2 import get_db_graphql_schema
 from dab_clone.src.db_handlers import get_engine, get_tables
 
 
@@ -24,9 +24,10 @@ def list_tables():
 def graphql_view():
     view = GraphQLView.as_view(
         "graphql",
-        schema=get_db_graphql_schema(engine=engine),
+        #schema=get_db_graphql_schema(engine=engine),
+        schema=get_db_graphql_schema(engine, inspector),
         graphiql=True,
-        format_error=custom_format_error,
+        #format_error=custom_format_error,
         auto_camelcase=False,
     )
     return view()
